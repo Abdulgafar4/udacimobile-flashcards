@@ -1,11 +1,29 @@
-# Sample Snack app
+## About This App
 
-Open the `App.js` file to start writing some code. You can preview the changes directly on your phone or tablet by scanning the **QR code** or use the iOS or Android emulators. When you're done, click **Save** and share the link!
+  # This was a react native application that let you create decks. 
 
-When you're ready to see everything that Expo provides (or if you want to use your own editor) you can **Download** your project and use it with [expo-cli](https://docs.expo.io/get-started/installation).
+  # Within the decks you can create question cards and aslo answer to the question.
 
-All projects created in Snack are publicly available, so you can easily share the link to this project via link, or embed it on a web page with the `<>` button.
+  # This is the Third Udacity Project using React-Native expo.
 
-If you're having problems, you can tweet to us [@expo](https://twitter.com/expo) or ask in our [forums](https://forums.expo.io/c/snack).
 
-Snack is Open Source. You can find the code on the [GitHub repo](https://github.com/expo/snack).
+
+## How To Install This App
+
+   # git clone: https://github.com/Abdulgafar4/udacity-mobile-flashcards.git
+
+   # cd udacity-mobile-flashcards
+
+   # After That Download The Dependency With: yarn
+
+
+## Usage
+
+
+  # Start The Web App Using: expo start --web
+  
+  ## You can use your devices to start the app
+
+   # Scan the QR Code using Expo Client app ( Learn to install the expo client app https://expo.io/tools#client) from an Adroid or IOS device
+
+   # Use an Android Emulator or IOS Simulator to run the app (Learn to install the emulator https://docs.expo.io/get-started/installation/?redirected )
