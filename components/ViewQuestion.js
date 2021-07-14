@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import allstyles from '../utils/style';
 import { gray, white, blue } from '../utils/colors';
 import SubmitButton from './SubmitButton';
@@ -14,41 +14,44 @@ static navigationOptions = ({ navigation }) => {
   };
 
  state ={
-   isAnswer: [],
-   isCard: 0
+   answer: [],
+   cards: 0
  }
 
-   nextQuestion = answer => {
+   nextQuestion = answers => {
      this.setState (prevState => {
     return {
-      isCard: prevState.isCard + 1,
-      answer: prevState.isAnswer.push(answer),
+      cards: prevState.cards + 1,
+      answers: prevState.answer.push(answers),
     };
      })
   };
 
    restart = () => {
    this.setState({
-      isCard: 0,
-      isAnswers: []
+      cards: 0,
+      answer: []
     });
   };
 
   totalAnswer = () => {
-    const sum = this.state.isAnswer.reduce((x, y) => x + y);
+    const sum = this.state.answer.reduce((x, y) => x + y);
     return sum;
   };
 
+  _onPressButton() {
+    alert(card.answer)
+  }
   render() {
 
   const { deck, navigation } = this.props;
-  const card = deck.questions[this.state.isCard] || 'complete';
+  const card = deck.questions[this.state.cards] || 'complete';
 
   if (card === 'complete') {
     return (
       <View style={allstyles.VQdeckCard}>
         <View style={allstyles.VQcontainer}>
-          <Text style={allstyles.VQquestion}>Quiz Complete!</Text>
+          <Text style={allstyles.VQcomplete}>Quiz Complete!</Text>
           <View style={allstyles.VQresultsContainer}>
             <Text style={allstyles.VQresultsTitle}>
               {this.totalAnswer()} out of {deck.questions.length}
@@ -79,14 +82,21 @@ static navigationOptions = ({ navigation }) => {
       <View style={allstyles.VQdeckCard}>
         <View style={allstyles.VQcontainer}>
           <Text style={allstyles.VQlabel}>{'Question:'}</Text>
-          <Text style={allstyles.VQquestion}>
-          { card.questions } </Text>
+          <Text style={allstyles.VQquiz}>
+          { card.quiz } 
+          </Text>
         </View>
       </View>
+      <View>
+        <Button
+            onPress={() =>  alert(card.answer)}
+            title="Click to show answer"
+          />
+        </View>
       <View style={allstyles.VQanswerButtonsContainer}>
         <SubmitButton
           style={[allstyles.button, allstyles.VQincorrectButton]}
-          onPress={() => this.nextQuestion(0)}>
+          onPress={() => card.answer === 'wrong' ? this.nextQuestion(1) : this.nextQuestion(0) }>
           <FontAwesome
             name="thumbs-down"
             size={20}
@@ -97,7 +107,7 @@ static navigationOptions = ({ navigation }) => {
         </SubmitButton>
         <SubmitButton
           style={[allstyles.button, allstyles.VQcorrectButton]}
-          onPress={() => this.nextQuestion(1)}>
+          onPress={() => card.answer === 'correct' ? this.nextQuestion(1) : this.nextQuestion(0) }>
           <FontAwesome
             name="thumbs-up"
             size={20}
@@ -109,7 +119,7 @@ static navigationOptions = ({ navigation }) => {
       </View>
       <View style={allstyles.VQprogressContainer}>
         <Text style={{ color: blue, textAlign: 'center' }}>
-          Card {this.state.isCard + 1} of {deck.questions.length}
+          Card {this.state.cards + 1} of {deck.questions.length}
         </Text>
       </View>
     </View>
@@ -126,3 +136,4 @@ function mapStateToProps(state, { navigation }) {
 }
 
 export default connect(mapStateToProps)(ViewQuestion);
+
